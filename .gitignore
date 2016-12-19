@@ -1,0 +1,7 @@
+target
+.project
+.classpath
+.settings
+#beans.xml contains DB password, beans.xml.dist is template
+beans.xml
+
