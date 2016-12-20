@@ -27,7 +27,7 @@ public class HibernateConceptDAO implements ConceptDAO {
     @Override
     public Collection<Concept> getAllConcepts() {
 	Session session = sessionFactory.getCurrentSession();
-	Query<Concept> query = session.getNamedQuery("Concept.findAll");
+	Query<Concept> query = session.createQuery("from Concept");
 	return query.list();
 
     }
