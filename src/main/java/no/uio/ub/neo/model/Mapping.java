@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="mappings")
 @NamedQuery(name="Mapping.findAll", query="SELECT m FROM Mapping m")
-public class Mapping implements Serializable {
+public class Mapping  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,33 +23,25 @@ public class Mapping implements Serializable {
 
 	private Timestamp created;
 
+	@Column(name="created_by")
+	private Integer createdBy;
+
 	@Column(name="mapping_relation")
 	private String mappingRelation;
+
+	@Column(name="source_concept_id")
+	private Integer sourceConceptId;
 
 	@Column(name="target_concept_id")
 	private String targetConceptId;
 
+	@Column(name="target_vocabulary_id")
+	private String targetVocabularyId;
+
 	private Timestamp verified;
 
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="source_concept_id")
-	private Concept concept;
-
-	//bi-directional many-to-one association to ExternalVocabulary
-	@ManyToOne
-	@JoinColumn(name="target_vocabulary_id")
-	private ExternalVocabulary externalVocabulary;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="created_by")
-	private User user1;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="verified_by")
-	private User user2;
+	@Column(name="verified_by")
+	private Integer verifiedBy;
 
 	public Mapping() {
 	}
@@ -70,12 +62,28 @@ public class Mapping implements Serializable {
 		this.created = created;
 	}
 
+	public Integer getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	public String getMappingRelation() {
 		return this.mappingRelation;
 	}
 
 	public void setMappingRelation(String mappingRelation) {
 		this.mappingRelation = mappingRelation;
+	}
+
+	public Integer getSourceConceptId() {
+		return this.sourceConceptId;
+	}
+
+	public void setSourceConceptId(Integer sourceConceptId) {
+		this.sourceConceptId = sourceConceptId;
 	}
 
 	public String getTargetConceptId() {
@@ -86,6 +94,14 @@ public class Mapping implements Serializable {
 		this.targetConceptId = targetConceptId;
 	}
 
+	public String getTargetVocabularyId() {
+		return this.targetVocabularyId;
+	}
+
+	public void setTargetVocabularyId(String targetVocabularyId) {
+		this.targetVocabularyId = targetVocabularyId;
+	}
+
 	public Timestamp getVerified() {
 		return this.verified;
 	}
@@ -94,36 +110,12 @@ public class Mapping implements Serializable {
 		this.verified = verified;
 	}
 
-	public Concept getConcept() {
-		return this.concept;
+	public Integer getVerifiedBy() {
+		return this.verifiedBy;
 	}
 
-	public void setConcept(Concept concept) {
-		this.concept = concept;
-	}
-
-	public ExternalVocabulary getExternalVocabulary() {
-		return this.externalVocabulary;
-	}
-
-	public void setExternalVocabulary(ExternalVocabulary externalVocabulary) {
-		this.externalVocabulary = externalVocabulary;
-	}
-
-	public User getUser1() {
-		return this.user1;
-	}
-
-	public void setUser1(User user1) {
-		this.user1 = user1;
-	}
-
-	public User getUser2() {
-		return this.user2;
-	}
-
-	public void setUser2(User user2) {
-		this.user2 = user2;
+	public void setVerifiedBy(Integer verifiedBy) {
+		this.verifiedBy = verifiedBy;
 	}
 
 }

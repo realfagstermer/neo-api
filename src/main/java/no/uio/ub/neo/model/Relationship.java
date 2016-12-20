@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="relationships")
 @NamedQuery(name="Relationship.findAll", query="SELECT r FROM Relationship r")
-public class Relationship implements Serializable {
+public class Relationship  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,32 +21,22 @@ public class Relationship implements Serializable {
 	@Column(name="relation_id")
 	private Integer relationId;
 
+	private Integer concept1;
+
+	private Integer concept2;
+
 	private Timestamp created;
+
+	@Column(name="created_by")
+	private Integer createdBy;
 
 	private Timestamp modified;
 
+	@Column(name="modified_by")
+	private Integer modifiedBy;
+
 	@Column(name="rel_type")
 	private String relType;
-
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="concept1")
-	private Concept concept1Bean;
-
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="concept2")
-	private Concept concept2Bean;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="created_by")
-	private User user1;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="modified_by")
-	private User user2;
 
 	public Relationship() {
 	}
@@ -59,12 +49,36 @@ public class Relationship implements Serializable {
 		this.relationId = relationId;
 	}
 
+	public Integer getConcept1() {
+		return this.concept1;
+	}
+
+	public void setConcept1(Integer concept1) {
+		this.concept1 = concept1;
+	}
+
+	public Integer getConcept2() {
+		return this.concept2;
+	}
+
+	public void setConcept2(Integer concept2) {
+		this.concept2 = concept2;
+	}
+
 	public Timestamp getCreated() {
 		return this.created;
 	}
 
 	public void setCreated(Timestamp created) {
 		this.created = created;
+	}
+
+	public Integer getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public Timestamp getModified() {
@@ -75,44 +89,20 @@ public class Relationship implements Serializable {
 		this.modified = modified;
 	}
 
+	public Integer getModifiedBy() {
+		return this.modifiedBy;
+	}
+
+	public void setModifiedBy(Integer modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
 	public String getRelType() {
 		return this.relType;
 	}
 
 	public void setRelType(String relType) {
 		this.relType = relType;
-	}
-
-	public Concept getConcept1Bean() {
-		return this.concept1Bean;
-	}
-
-	public void setConcept1Bean(Concept concept1Bean) {
-		this.concept1Bean = concept1Bean;
-	}
-
-	public Concept getConcept2Bean() {
-		return this.concept2Bean;
-	}
-
-	public void setConcept2Bean(Concept concept2Bean) {
-		this.concept2Bean = concept2Bean;
-	}
-
-	public User getUser1() {
-		return this.user1;
-	}
-
-	public void setUser1(User user1) {
-		this.user1 = user1;
-	}
-
-	public User getUser2() {
-		return this.user2;
-	}
-
-	public void setUser2(User user2) {
-		this.user2 = user2;
 	}
 
 }

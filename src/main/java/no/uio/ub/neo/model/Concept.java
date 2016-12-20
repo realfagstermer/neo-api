@@ -8,12 +8,12 @@ import java.util.List;
 
 /**
  * The persistent class for the concepts database table.
- *
+ * 
  */
 @Entity
 @Table(name="concepts")
 @NamedQuery(name="Concept.findAll", query="SELECT c FROM Concept c")
-public class Concept implements Serializable {
+public class Concept  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,9 +27,15 @@ public class Concept implements Serializable {
 
 	private Timestamp created;
 
+	@Column(name="created_by")
+	private Integer createdBy;
+
 	private String definition;
 
 	private Timestamp deprecated;
+
+	@Column(name="deprecated_by")
+	private Integer deprecatedBy;
 
 	@Column(name="editorial_note")
 	private String editorialNote;
@@ -39,7 +45,13 @@ public class Concept implements Serializable {
 
 	private Timestamp modified;
 
+	@Column(name="modified_by")
+	private Integer modifiedBy;
+
 	private String note;
+
+	@Column(name="replaced_by")
+	private Integer replacedBy;
 
 	@Column(name="scope_note")
 	private String scopeNote;
@@ -47,70 +59,8 @@ public class Concept implements Serializable {
 	@Column(name="used_by_libs")
 	private String usedByLibs;
 
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="replaced_by")
-	private Concept concept;
-
-	//bi-directional many-to-one association to Concept
-	@OneToMany(mappedBy="concept")
-	private List<Concept> concepts;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="created_by")
-	private User user1;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="deprecated_by")
-	private User user2;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="modified_by")
-	private User user3;
-
-	//bi-directional many-to-one association to Vocabulary
-	@ManyToOne
-	@JoinColumn(name="vocab_id")
-	private Vocabulary vocabulary;
-
-	//bi-directional many-to-one association to GroupMembership
-	@OneToMany(mappedBy="concept")
-	private List<GroupMembership> groupMemberships;
-
-	//bi-directional many-to-one association to Mapping
-	@OneToMany(mappedBy="concept")
-	private List<Mapping> mappings;
-
-	//bi-directional many-to-one association to Relationship
-	@OneToMany(mappedBy="concept1Bean")
-	private List<Relationship> relationships1;
-
-	//bi-directional many-to-one association to Relationship
-	@OneToMany(mappedBy="concept2Bean")
-	private List<Relationship> relationships2;
-
-	//bi-directional many-to-one association to String
-	@OneToMany(mappedBy="concept1")
-	private List<String> strings1;
-
-	//bi-directional many-to-one association to String
-	@OneToMany(mappedBy="concept2")
-	private List<String> strings2;
-
-	//bi-directional many-to-one association to String
-	@OneToMany(mappedBy="concept3")
-	private List<String> strings3;
-
-	//bi-directional many-to-one association to String
-	@OneToMany(mappedBy="concept4")
-	private List<String> strings4;
-
-	//bi-directional many-to-one association to String
-	@OneToMany(mappedBy="concept5")
-	private List<String> strings5;
+	@Column(name="vocab_id")
+	private String vocabId;
 
 	//bi-directional many-to-one association to Term
 	@OneToMany(mappedBy="concept")
@@ -143,6 +93,14 @@ public class Concept implements Serializable {
 		this.created = created;
 	}
 
+	public Integer getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	public String getDefinition() {
 		return this.definition;
 	}
@@ -157,6 +115,14 @@ public class Concept implements Serializable {
 
 	public void setDeprecated(Timestamp deprecated) {
 		this.deprecated = deprecated;
+	}
+
+	public Integer getDeprecatedBy() {
+		return this.deprecatedBy;
+	}
+
+	public void setDeprecatedBy(Integer deprecatedBy) {
+		this.deprecatedBy = deprecatedBy;
 	}
 
 	public String getEditorialNote() {
@@ -183,12 +149,28 @@ public class Concept implements Serializable {
 		this.modified = modified;
 	}
 
+	public Integer getModifiedBy() {
+		return this.modifiedBy;
+	}
+
+	public void setModifiedBy(Integer modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
 	public String getNote() {
 		return this.note;
 	}
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public Integer getReplacedBy() {
+		return this.replacedBy;
+	}
+
+	public void setReplacedBy(Integer replacedBy) {
+		this.replacedBy = replacedBy;
 	}
 
 	public String getScopeNote() {
@@ -207,264 +189,12 @@ public class Concept implements Serializable {
 		this.usedByLibs = usedByLibs;
 	}
 
-	public Concept getConcept() {
-		return this.concept;
+	public String getVocabId() {
+		return this.vocabId;
 	}
 
-	public void setConcept(Concept concept) {
-		this.concept = concept;
-	}
-
-	public List<Concept> getConcepts() {
-		return this.concepts;
-	}
-
-	public void setConcepts(List<Concept> concepts) {
-		this.concepts = concepts;
-	}
-
-	public Concept addConcept(Concept concept) {
-		getConcepts().add(concept);
-		concept.setConcept(this);
-
-		return concept;
-	}
-
-	public Concept removeConcept(Concept concept) {
-		getConcepts().remove(concept);
-		concept.setConcept(null);
-
-		return concept;
-	}
-
-	public User getUser1() {
-		return this.user1;
-	}
-
-	public void setUser1(User user1) {
-		this.user1 = user1;
-	}
-
-	public User getUser2() {
-		return this.user2;
-	}
-
-	public void setUser2(User user2) {
-		this.user2 = user2;
-	}
-
-	public User getUser3() {
-		return this.user3;
-	}
-
-	public void setUser3(User user3) {
-		this.user3 = user3;
-	}
-
-	public Vocabulary getVocabulary() {
-		return this.vocabulary;
-	}
-
-	public void setVocabulary(Vocabulary vocabulary) {
-		this.vocabulary = vocabulary;
-	}
-
-	public List<GroupMembership> getGroupMemberships() {
-		return this.groupMemberships;
-	}
-
-	public void setGroupMemberships(List<GroupMembership> groupMemberships) {
-		this.groupMemberships = groupMemberships;
-	}
-
-	public GroupMembership addGroupMembership(GroupMembership groupMembership) {
-		getGroupMemberships().add(groupMembership);
-		groupMembership.setConcept(this);
-
-		return groupMembership;
-	}
-
-	public GroupMembership removeGroupMembership(GroupMembership groupMembership) {
-		getGroupMemberships().remove(groupMembership);
-		groupMembership.setConcept(null);
-
-		return groupMembership;
-	}
-
-	public List<Mapping> getMappings() {
-		return this.mappings;
-	}
-
-	public void setMappings(List<Mapping> mappings) {
-		this.mappings = mappings;
-	}
-
-	public Mapping addMapping(Mapping mapping) {
-		getMappings().add(mapping);
-		mapping.setConcept(this);
-
-		return mapping;
-	}
-
-	public Mapping removeMapping(Mapping mapping) {
-		getMappings().remove(mapping);
-		mapping.setConcept(null);
-
-		return mapping;
-	}
-
-	public List<Relationship> getRelationships1() {
-		return this.relationships1;
-	}
-
-	public void setRelationships1(List<Relationship> relationships1) {
-		this.relationships1 = relationships1;
-	}
-
-	public Relationship addRelationships1(Relationship relationships1) {
-		getRelationships1().add(relationships1);
-		relationships1.setConcept1Bean(this);
-
-		return relationships1;
-	}
-
-	public Relationship removeRelationships1(Relationship relationships1) {
-		getRelationships1().remove(relationships1);
-		relationships1.setConcept1Bean(null);
-
-		return relationships1;
-	}
-
-	public List<Relationship> getRelationships2() {
-		return this.relationships2;
-	}
-
-	public void setRelationships2(List<Relationship> relationships2) {
-		this.relationships2 = relationships2;
-	}
-
-	public Relationship addRelationships2(Relationship relationships2) {
-		getRelationships2().add(relationships2);
-		relationships2.setConcept2Bean(this);
-
-		return relationships2;
-	}
-
-	public Relationship removeRelationships2(Relationship relationships2) {
-		getRelationships2().remove(relationships2);
-		relationships2.setConcept2Bean(null);
-
-		return relationships2;
-	}
-
-	public List<String> getStrings1() {
-		return this.strings1;
-	}
-
-	public void setStrings1(List<String> strings1) {
-		this.strings1 = strings1;
-	}
-
-	public String addStrings1(String strings1) {
-		getStrings1().add(strings1);
-		strings1.setConcept1(this);
-
-		return strings1;
-	}
-
-	public String removeStrings1(String strings1) {
-		getStrings1().remove(strings1);
-		strings1.setConcept1(null);
-
-		return strings1;
-	}
-
-	public List<String> getStrings2() {
-		return this.strings2;
-	}
-
-	public void setStrings2(List<String> strings2) {
-		this.strings2 = strings2;
-	}
-
-	public String addStrings2(String strings2) {
-		getStrings2().add(strings2);
-		strings2.setConcept2(this);
-
-		return strings2;
-	}
-
-	public String removeStrings2(String strings2) {
-		getStrings2().remove(strings2);
-		strings2.setConcept2(null);
-
-		return strings2;
-	}
-
-	public List<String> getStrings3() {
-		return this.strings3;
-	}
-
-	public void setStrings3(List<String> strings3) {
-		this.strings3 = strings3;
-	}
-
-	public String addStrings3(String strings3) {
-		getStrings3().add(strings3);
-		strings3.setConcept3(this);
-
-		return strings3;
-	}
-
-	public String removeStrings3(String strings3) {
-		getStrings3().remove(strings3);
-		strings3.setConcept3(null);
-
-		return strings3;
-	}
-
-	public List<String> getStrings4() {
-		return this.strings4;
-	}
-
-	public void setStrings4(List<String> strings4) {
-		this.strings4 = strings4;
-	}
-
-	public String addStrings4(String strings4) {
-		getStrings4().add(strings4);
-		strings4.setConcept4(this);
-
-		return strings4;
-	}
-
-	public String removeStrings4(String strings4) {
-		getStrings4().remove(strings4);
-		strings4.setConcept4(null);
-
-		return strings4;
-	}
-
-	public List<String> getStrings5() {
-		return this.strings5;
-	}
-
-	public void setStrings5(List<String> strings5) {
-		this.strings5 = strings5;
-	}
-
-	public String addStrings5(String strings5) {
-		getStrings5().add(strings5);
-		strings5.setConcept5(this);
-
-		return strings5;
-	}
-
-	public String removeStrings5(String strings5) {
-		getStrings5().remove(strings5);
-		strings5.setConcept5(null);
-
-		return strings5;
+	public void setVocabId(String vocabId) {
+		this.vocabId = vocabId;
 	}
 
 	public List<Term> getTerms() {

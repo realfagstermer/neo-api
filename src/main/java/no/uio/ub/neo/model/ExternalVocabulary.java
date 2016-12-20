@@ -3,7 +3,6 @@ package no.uio.ub.neo.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name="external_vocabularies")
 @NamedQuery(name="ExternalVocabulary.findAll", query="SELECT e FROM ExternalVocabulary e")
-public class ExternalVocabulary implements Serializable {
+public class ExternalVocabulary  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -39,10 +38,6 @@ public class ExternalVocabulary implements Serializable {
 
 	@Column(name="sparql_endpoint")
 	private String sparqlEndpoint;
-
-	//bi-directional many-to-one association to Mapping
-	@OneToMany(mappedBy="externalVocabulary")
-	private List<Mapping> mappings;
 
 	public ExternalVocabulary() {
 	}
@@ -109,28 +104,6 @@ public class ExternalVocabulary implements Serializable {
 
 	public void setSparqlEndpoint(String sparqlEndpoint) {
 		this.sparqlEndpoint = sparqlEndpoint;
-	}
-
-	public List<Mapping> getMappings() {
-		return this.mappings;
-	}
-
-	public void setMappings(List<Mapping> mappings) {
-		this.mappings = mappings;
-	}
-
-	public Mapping addMapping(Mapping mapping) {
-		getMappings().add(mapping);
-		mapping.setExternalVocabulary(this);
-
-		return mapping;
-	}
-
-	public Mapping removeMapping(Mapping mapping) {
-		getMappings().remove(mapping);
-		mapping.setExternalVocabulary(null);
-
-		return mapping;
 	}
 
 }

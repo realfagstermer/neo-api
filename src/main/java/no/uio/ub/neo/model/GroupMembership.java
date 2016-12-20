@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="group_memberships")
 @NamedQuery(name="GroupMembership.findAll", query="SELECT g FROM GroupMembership g")
-public class GroupMembership implements Serializable {
+public class GroupMembership  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,17 +21,13 @@ public class GroupMembership implements Serializable {
 	@Column(name="group_membership_id")
 	private Integer groupMembershipId;
 
+	@Column(name="concept_id")
+	private Integer conceptId;
+
 	private Timestamp created;
 
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="concept_id")
-	private Concept concept;
-
-	//bi-directional many-to-one association to Group
-	@ManyToOne
-	@JoinColumn(name="group_id")
-	private Group group;
+	@Column(name="group_id")
+	private Integer groupId;
 
 	public GroupMembership() {
 	}
@@ -44,6 +40,14 @@ public class GroupMembership implements Serializable {
 		this.groupMembershipId = groupMembershipId;
 	}
 
+	public Integer getConceptId() {
+		return this.conceptId;
+	}
+
+	public void setConceptId(Integer conceptId) {
+		this.conceptId = conceptId;
+	}
+
 	public Timestamp getCreated() {
 		return this.created;
 	}
@@ -52,20 +56,12 @@ public class GroupMembership implements Serializable {
 		this.created = created;
 	}
 
-	public Concept getConcept() {
-		return this.concept;
+	public Integer getGroupId() {
+		return this.groupId;
 	}
 
-	public void setConcept(Concept concept) {
-		this.concept = concept;
-	}
-
-	public Group getGroup() {
-		return this.group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
 	}
 
 }

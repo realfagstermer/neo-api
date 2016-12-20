@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="terms")
 @NamedQuery(name="Term.findAll", query="SELECT t FROM Term t")
-public class Term implements Serializable {
+public class Term  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -20,6 +20,9 @@ public class Term implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TERMS_TERMID_GENERATOR")
 	@Column(name="term_id")
 	private Integer termId;
+
+	@Column(name="lang_id")
+	private String langId;
 
 	@Column(name="lexical_value")
 	private String lexicalValue;
@@ -29,28 +32,19 @@ public class Term implements Serializable {
 	@Column(name="term_created")
 	private Timestamp termCreated;
 
+	@Column(name="term_created_by")
+	private Integer termCreatedBy;
+
 	@Column(name="term_modified")
 	private Timestamp termModified;
 
+	@Column(name="term_modified_by")
+	private Integer termModifiedBy;
+
 	//bi-directional many-to-one association to Concept
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="concept_id")
 	private Concept concept;
-
-	//bi-directional many-to-one association to Language
-	@ManyToOne
-	@JoinColumn(name="lang_id")
-	private Language language;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="term_created_by")
-	private User user1;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="term_modified_by")
-	private User user2;
 
 	public Term() {
 	}
@@ -61,6 +55,14 @@ public class Term implements Serializable {
 
 	public void setTermId(Integer termId) {
 		this.termId = termId;
+	}
+
+	public String getLangId() {
+		return this.langId;
+	}
+
+	public void setLangId(String langId) {
+		this.langId = langId;
 	}
 
 	public String getLexicalValue() {
@@ -87,6 +89,14 @@ public class Term implements Serializable {
 		this.termCreated = termCreated;
 	}
 
+	public Integer getTermCreatedBy() {
+		return this.termCreatedBy;
+	}
+
+	public void setTermCreatedBy(Integer termCreatedBy) {
+		this.termCreatedBy = termCreatedBy;
+	}
+
 	public Timestamp getTermModified() {
 		return this.termModified;
 	}
@@ -95,36 +105,20 @@ public class Term implements Serializable {
 		this.termModified = termModified;
 	}
 
+	public Integer getTermModifiedBy() {
+		return this.termModifiedBy;
+	}
+
+	public void setTermModifiedBy(Integer termModifiedBy) {
+		this.termModifiedBy = termModifiedBy;
+	}
+
 	public Concept getConcept() {
 		return this.concept;
 	}
 
 	public void setConcept(Concept concept) {
 		this.concept = concept;
-	}
-
-	public Language getLanguage() {
-		return this.language;
-	}
-
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
-
-	public User getUser1() {
-		return this.user1;
-	}
-
-	public void setUser1(User user1) {
-		this.user1 = user1;
-	}
-
-	public User getUser2() {
-		return this.user2;
-	}
-
-	public void setUser2(User user2) {
-		this.user2 = user2;
 	}
 
 }

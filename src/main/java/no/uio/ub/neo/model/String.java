@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="strings")
 @NamedQuery(name="String.findAll", query="SELECT s FROM String s")
-public class String implements Serializable {
+public class String  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,54 +23,31 @@ public class String implements Serializable {
 
 	private Timestamp created;
 
+	@Column(name="created_by")
+	private Integer createdBy;
+
 	private Timestamp deprecated;
+
+	@Column(name="deprecated_by")
+	private Integer deprecatedBy;
+
+	private Integer form;
+
+	private Integer geographic;
 
 	private Timestamp modified;
 
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="form")
-	private Concept concept1;
+	@Column(name="modified_by")
+	private Integer modifiedBy;
 
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="geographic")
-	private Concept concept2;
+	private Integer subtopic;
 
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="subtopic")
-	private Concept concept3;
+	private Integer temporal;
 
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="temporal")
-	private Concept concept4;
+	private Integer topic;
 
-	//bi-directional many-to-one association to Concept
-	@ManyToOne
-	@JoinColumn(name="topic")
-	private Concept concept5;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="created_by")
-	private User user1;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="deprecated_by")
-	private User user2;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="modified_by")
-	private User user3;
-
-	//bi-directional many-to-one association to Vocabulary
-	@ManyToOne
-	@JoinColumn(name="vocab_id")
-	private Vocabulary vocabulary;
+	@Column(name="vocab_id")
+	private String vocabId;
 
 	public String() {
 	}
@@ -91,12 +68,44 @@ public class String implements Serializable {
 		this.created = created;
 	}
 
+	public Integer getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	public Timestamp getDeprecated() {
 		return this.deprecated;
 	}
 
 	public void setDeprecated(Timestamp deprecated) {
 		this.deprecated = deprecated;
+	}
+
+	public Integer getDeprecatedBy() {
+		return this.deprecatedBy;
+	}
+
+	public void setDeprecatedBy(Integer deprecatedBy) {
+		this.deprecatedBy = deprecatedBy;
+	}
+
+	public Integer getForm() {
+		return this.form;
+	}
+
+	public void setForm(Integer form) {
+		this.form = form;
+	}
+
+	public Integer getGeographic() {
+		return this.geographic;
+	}
+
+	public void setGeographic(Integer geographic) {
+		this.geographic = geographic;
 	}
 
 	public Timestamp getModified() {
@@ -107,76 +116,44 @@ public class String implements Serializable {
 		this.modified = modified;
 	}
 
-	public Concept getConcept1() {
-		return this.concept1;
+	public Integer getModifiedBy() {
+		return this.modifiedBy;
 	}
 
-	public void setConcept1(Concept concept1) {
-		this.concept1 = concept1;
+	public void setModifiedBy(Integer modifiedBy) {
+		this.modifiedBy = modifiedBy;
 	}
 
-	public Concept getConcept2() {
-		return this.concept2;
+	public Integer getSubtopic() {
+		return this.subtopic;
 	}
 
-	public void setConcept2(Concept concept2) {
-		this.concept2 = concept2;
+	public void setSubtopic(Integer subtopic) {
+		this.subtopic = subtopic;
 	}
 
-	public Concept getConcept3() {
-		return this.concept3;
+	public Integer getTemporal() {
+		return this.temporal;
 	}
 
-	public void setConcept3(Concept concept3) {
-		this.concept3 = concept3;
+	public void setTemporal(Integer temporal) {
+		this.temporal = temporal;
 	}
 
-	public Concept getConcept4() {
-		return this.concept4;
+	public Integer getTopic() {
+		return this.topic;
 	}
 
-	public void setConcept4(Concept concept4) {
-		this.concept4 = concept4;
+	public void setTopic(Integer topic) {
+		this.topic = topic;
 	}
 
-	public Concept getConcept5() {
-		return this.concept5;
+	public String getVocabId() {
+		return this.vocabId;
 	}
 
-	public void setConcept5(Concept concept5) {
-		this.concept5 = concept5;
-	}
-
-	public User getUser1() {
-		return this.user1;
-	}
-
-	public void setUser1(User user1) {
-		this.user1 = user1;
-	}
-
-	public User getUser2() {
-		return this.user2;
-	}
-
-	public void setUser2(User user2) {
-		this.user2 = user2;
-	}
-
-	public User getUser3() {
-		return this.user3;
-	}
-
-	public void setUser3(User user3) {
-		this.user3 = user3;
-	}
-
-	public Vocabulary getVocabulary() {
-		return this.vocabulary;
-	}
-
-	public void setVocabulary(Vocabulary vocabulary) {
-		this.vocabulary = vocabulary;
+	public void setVocabId(String vocabId) {
+		this.vocabId = vocabId;
 	}
 
 }
