@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>no.uio.ub</groupId>
-	<artifactId>neo</artifactId>
+	<artifactId>neo-api</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<packaging>war</packaging>
-	<name>Neo</name>
+	<name>Neo API</name>
 
 	<properties>
 		<spring.version>4.3.2.RELEASE</spring.version>
@@ -143,6 +143,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>neo-api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -156,9 +157,9 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.1</version>
+				<version>2.2</version>
 				<configuration>
-					<path>/</path>
+					<path>/neo-api</path>
 				</configuration>
 			</plugin>
 		</plugins>
