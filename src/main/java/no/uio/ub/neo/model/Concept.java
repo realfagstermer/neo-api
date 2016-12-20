@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * The persistent class for the concepts database table.
- * 
+ *
  */
 @Entity
 @Table(name="concepts")

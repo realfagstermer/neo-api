@@ -2,6 +2,5 @@ target
 .project
 .classpath
 .settings
-#beans.xml contains DB password, beans.xml.dist is template
-beans.xml
-
+#mvc-dispatcher-servlet.xml contains DB password, ...dist.xml is template
+mvc-dispatcher-servlet.xml
