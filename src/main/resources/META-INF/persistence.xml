@@ -8,7 +8,6 @@
 		<class>no.uio.ub.neo.model.Language</class>
 		<class>no.uio.ub.neo.model.Mapping</class>
 		<class>no.uio.ub.neo.model.Relationship</class>
-		<class>no.uio.ub.neo.model.String</class>
 		<class>no.uio.ub.neo.model.Term</class>
 		<class>no.uio.ub.neo.model.User</class>
 		<class>no.uio.ub.neo.model.Vocabulary</class>

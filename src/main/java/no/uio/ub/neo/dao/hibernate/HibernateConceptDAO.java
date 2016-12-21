@@ -2,6 +2,7 @@ package no.uio.ub.neo.dao.hibernate;
 
 import java.util.Collection;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -18,7 +19,9 @@ public class HibernateConceptDAO implements ConceptDAO {
 
     @Override
     public Concept getConcept(int id) {
-	return sessionFactory.getCurrentSession().get(Concept.class, id);
+	final Concept concept = sessionFactory.getCurrentSession().get(Concept.class, id);
+//	Hibernate.initialize(concept.getTerms());
+	return concept;
     }
 
     @Override

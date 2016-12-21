@@ -1,20 +1,22 @@
 package no.uio.ub.neo.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.sql.Timestamp;
 import java.util.List;
 
 
 /**
  * The persistent class for the concepts database table.
- * 
+ *
  */
 @Entity
 @Table(name="concepts")
 @NamedQuery(name="Concept.findAll", query="SELECT c FROM Concept c")
 public class Concept  {
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name="CONCEPTS_CONCEPTID_GENERATOR", sequenceName="CONCEPTS_CONCEPT_ID_SEQ")
@@ -63,7 +65,8 @@ public class Concept  {
 	private String vocabId;
 
 	//bi-directional many-to-one association to Term
-	@OneToMany(mappedBy="concept")
+	@OneToMany(mappedBy="concept", fetch=FetchType.EAGER)
+	@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 	private List<Term> terms;
 
 	public Concept() {

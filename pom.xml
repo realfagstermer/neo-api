@@ -10,10 +10,10 @@
 	<name>Neo API</name>
 
 	<properties>
-		<spring.version>4.3.2.RELEASE</spring.version>
+		<spring.version>4.3.4.RELEASE</spring.version>
 		<junit.version>4.12</junit.version>
 		<jdk.version>1.8</jdk.version>
-		<hibernate.version>5.2.2.Final</hibernate.version>
+		<hibernate.version>5.2.5.Final</hibernate.version>
 	</properties>
 
 	<dependencies>

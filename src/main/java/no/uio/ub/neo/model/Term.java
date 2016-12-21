@@ -1,13 +1,12 @@
 package no.uio.ub.neo.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 
 /**
  * The persistent class for the terms database table.
- * 
+ *
  */
 @Entity
 @Table(name="terms")
