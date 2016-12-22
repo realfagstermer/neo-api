@@ -1,6 +1,9 @@
 package no.uio.ub.neo.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 
 
@@ -41,6 +44,7 @@ public class Term  {
 	private Integer termModifiedBy;
 
 	//bi-directional many-to-one association to Concept
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="concept_id")
 	private Concept concept;
