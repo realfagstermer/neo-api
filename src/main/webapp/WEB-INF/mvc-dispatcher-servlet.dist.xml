@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
 	<!--<mvc:resources mapping="/resources/**" location="/resources/" /> -->
-	<context:component-scan base-package="no.uio.ub.neo" />
+	<context:component-scan base-package="no.uio.neo" />
 	<mvc:annotation-driven />
 
 	<bean id="contentNegotiationManager"
@@ -58,7 +58,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="no.uio.ub.neo.model" />
+		<property name="packagesToScan" value="no.uio.neo.model" />
 		<property name="hibernateProperties">
 			<props>
 				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop> -->
