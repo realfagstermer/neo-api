@@ -14,6 +14,9 @@
 	<!--<mvc:resources mapping="/resources/**" location="/resources/" /> -->
 	<context:component-scan base-package="no.uio.neo" />
 	<mvc:annotation-driven />
+	<mvc:cors>
+		<mvc:mapping path="/**" />
+	</mvc:cors>
 
 	<bean id="contentNegotiationManager"
 		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
