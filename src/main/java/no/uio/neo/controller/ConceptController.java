@@ -16,14 +16,20 @@ public class ConceptController {
     @Autowired
     private ConceptService conceptService;
 
-    @RequestMapping(value = "/concept", method = RequestMethod.GET)
+    @RequestMapping(value = "/concepts", method = RequestMethod.GET)
     public Collection<Concept> getAllConcepts(HttpServletRequest request, HttpServletResponse response) {
-	return conceptService.getAllConcepts();
+        final String term = request.getParameter("term");
+
+        if (term != null && !term.trim().isEmpty()) {
+            return conceptService.getConceptsMatching(term);
+        } else {
+            return conceptService.getAllConcepts();
+        }
     }
 
-    @RequestMapping(value = "/concept/{conceptId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/concepts/{conceptId}", method = RequestMethod.GET)
     public Concept getConcept(@PathVariable("conceptId") int conceptId, HttpServletRequest request, HttpServletResponse response) {
-	return conceptService.getConcept(conceptId);
+        return conceptService.getConcept(conceptId);
     }
 
 }

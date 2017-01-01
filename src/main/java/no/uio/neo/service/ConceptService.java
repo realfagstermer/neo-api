@@ -10,4 +10,6 @@ public interface ConceptService {
     void delConcept(int conceptId);
 
     Concept getConcept(int conceptId);
+
+    Collection<Concept> getConceptsMatching(String term);
 }

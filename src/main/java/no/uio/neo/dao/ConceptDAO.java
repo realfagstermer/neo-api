@@ -34,4 +34,12 @@ public interface ConceptDAO {
      * @param concept the concept to delete
      */
     void delConcept(Concept concept);
+
+    /**
+     * search for concepts with terms matching term
+     *
+     * @param term search string
+     * @return Collection of matching concepts
+     */
+    Collection<Concept> getConceptsWithTerm(String term);
 }

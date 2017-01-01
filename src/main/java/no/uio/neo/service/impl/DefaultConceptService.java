@@ -36,4 +36,9 @@ public class DefaultConceptService implements ConceptService {
         return conceptDAO.getConcept(conceptId);
     }
 
+    @Override
+    public Collection<Concept> getConceptsMatching(String term) {
+        return conceptDAO.getConceptsWithTerm(term);
+    }
+
 }
