@@ -3,6 +3,7 @@ package no.uio.neo.model;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.sql.Timestamp;
@@ -12,11 +13,13 @@ import java.util.List;
  * The persistent class for the concepts database table.
  *
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "concepts")
 @NamedQuery(name = "Concept.findAll", query = "SELECT c FROM Concept c")
 public class Concept {
 
+    @JsonProperty("id")
     @Id
     @SequenceGenerator(name = "CONCEPTS_CONCEPTID_GENERATOR", sequenceName = "CONCEPTS_CONCEPT_ID_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONCEPTS_CONCEPTID_GENERATOR")
@@ -65,7 +68,6 @@ public class Concept {
 
     // bi-directional many-to-one association to Term
     @OneToMany(mappedBy = "concept", fetch = FetchType.EAGER)
-    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
     private List<Term> terms;
 
     public Concept() {

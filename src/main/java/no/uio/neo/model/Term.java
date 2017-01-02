@@ -2,7 +2,10 @@ package no.uio.neo.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.sql.Timestamp;
 
@@ -10,12 +13,14 @@ import java.sql.Timestamp;
  * The persistent class for the terms database table.
  *
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "terms")
 @NamedQuery(name = "Term.findAll", query = "SELECT t FROM Term t")
 public class Term {
     private static final long serialVersionUID = 1L;
 
+    @JsonProperty("id")
     @Id
     @SequenceGenerator(name = "TERMS_TERMID_GENERATOR", sequenceName = "TERMS_TERM_ID_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TERMS_TERMID_GENERATOR")
