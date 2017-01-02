@@ -50,6 +50,7 @@ public class HibernateConceptDAO implements ConceptDAO {
 
         //terms are in a separate table, we need to join
         Join<Concept, Term> join = concept.join(Concept_.terms);
+        query.select(concept).distinct(true);
 
         // lowercase both sides of comparison, for case insensitive search
         query.where(builder.like(builder.lower(join.get(Term_.lexicalValue)), "%" + term.toLowerCase() + "%"));
