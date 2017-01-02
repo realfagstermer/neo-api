@@ -37,8 +37,11 @@ public class HibernateConceptDAO implements ConceptDAO {
     @Override
     public Collection<Concept> getAllConcepts() {
         Session session = sessionFactory.getCurrentSession();
-        Query<Concept> query = session.createQuery("from Concept");
-        return query.list();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Concept> query = builder.createQuery(Concept.class);
+        Root<Concept> concept = query.from(Concept.class);
+        query.select(concept);
+        return session.createQuery(query).getResultList();
     }
 
     @Override
@@ -54,8 +57,7 @@ public class HibernateConceptDAO implements ConceptDAO {
 
         // lowercase both sides of comparison, for case insensitive search
         query.where(builder.like(builder.lower(join.get(Term_.lexicalValue)), "%" + term.toLowerCase() + "%"));
-        Collection<Concept> result = session.createQuery(query).getResultList();
-        return result;
+        return session.createQuery(query).getResultList();
     }
 
     @Override
