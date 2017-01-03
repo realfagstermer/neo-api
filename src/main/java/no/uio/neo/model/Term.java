@@ -2,6 +2,7 @@ package no.uio.neo.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -37,6 +38,7 @@ public class Term {
 
     private String status;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @JsonProperty("created")
     @Column(name = "term_created")
     private Timestamp termCreated;
@@ -45,6 +47,7 @@ public class Term {
     @Column(name = "term_created_by")
     private Integer termCreatedBy;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @JsonProperty("modified")
     @Column(name = "term_modified")
     private Timestamp termModified;

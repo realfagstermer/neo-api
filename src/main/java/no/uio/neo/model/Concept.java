@@ -2,6 +2,7 @@ package no.uio.neo.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -30,6 +31,7 @@ public class Concept {
     @Column(name = "concept_type")
     private String conceptType;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Timestamp created;
 
     @Column(name = "created_by")
@@ -37,6 +39,7 @@ public class Concept {
 
     private String definition;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Timestamp deprecated;
 
     @Column(name = "deprecated_by")
@@ -48,6 +51,7 @@ public class Concept {
     @Column(name = "external_id")
     private Integer externalId;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Timestamp modified;
 
     @Column(name = "modified_by")
