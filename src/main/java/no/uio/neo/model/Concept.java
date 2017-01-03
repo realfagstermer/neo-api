@@ -26,6 +26,7 @@ public class Concept {
     @Column(name = "concept_id")
     private Integer conceptId;
 
+    @JsonProperty("type")
     @Column(name = "concept_type")
     private String conceptType;
 
@@ -63,6 +64,7 @@ public class Concept {
     @Column(name = "used_by_libs")
     private String usedByLibs;
 
+    @JsonProperty("vocab")
     @Column(name = "vocab_id")
     private String vocabId;
 

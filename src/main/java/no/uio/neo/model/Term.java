@@ -27,23 +27,29 @@ public class Term {
     @Column(name = "term_id")
     private Integer termId;
 
+    @JsonProperty("lang")
     @Column(name = "lang_id")
     private String langId;
 
+    @JsonProperty("value")
     @Column(name = "lexical_value")
     private String lexicalValue;
 
     private String status;
 
+    @JsonProperty("created")
     @Column(name = "term_created")
     private Timestamp termCreated;
 
+    @JsonProperty("createdBy")
     @Column(name = "term_created_by")
     private Integer termCreatedBy;
 
+    @JsonProperty("modified")
     @Column(name = "term_modified")
     private Timestamp termModified;
 
+    @JsonProperty("modifiedBy")
     @Column(name = "term_modified_by")
     private Integer termModifiedBy;
 
