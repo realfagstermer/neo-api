@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -48,6 +49,7 @@ public class Concept {
     @Column(name = "editorial_note")
     private String editorialNote;
 
+    @JsonIgnore
     @Column(name = "external_id")
     private Integer externalId;
 
@@ -143,12 +145,10 @@ public class Concept {
         this.editorialNote = editorialNote;
     }
 
-    public Integer getExternalId() {
-        return this.externalId;
-    }
-
-    public void setExternalId(Integer externalId) {
-        this.externalId = externalId;
+    @JsonProperty("externalId")
+    public String getExternalId() {
+        int padding = (vocabId.equals("REAL") ? 6 : 5);// todo: fetch from database, support ujur
+        return String.format("%s%0" + padding + "d", vocabId, externalId);
     }
 
     public Timestamp getModified() {
