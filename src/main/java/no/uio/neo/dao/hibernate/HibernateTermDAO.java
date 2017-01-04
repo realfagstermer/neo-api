@@ -6,12 +6,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import no.uio.neo.dao.TermDAO;
 import no.uio.neo.model.Term;
 
-@Component("termDAO")
+@Repository
 public class HibernateTermDAO implements TermDAO {
     @Autowired
     private SessionFactory sessionFactory;

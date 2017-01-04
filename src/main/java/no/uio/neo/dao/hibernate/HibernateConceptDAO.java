@@ -4,12 +4,10 @@ import java.util.Collection;
 
 import javax.persistence.criteria.*;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import no.uio.neo.dao.ConceptDAO;
 import no.uio.neo.model.Concept;
@@ -17,7 +15,7 @@ import no.uio.neo.model.Concept_;
 import no.uio.neo.model.Term;
 import no.uio.neo.model.Term_;
 
-@Component("conceptDAO")
+@Repository
 public class HibernateConceptDAO implements ConceptDAO {
     @Autowired
     private SessionFactory sessionFactory;
