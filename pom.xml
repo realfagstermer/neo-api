@@ -59,7 +59,7 @@
 		</dependency>
 
 		<!-- May need commenting in/out, depending on your environment -->
-		<!--<dependency> <groupId>javax.servlet</groupId> <artifactId>jsp-api</artifactId> 
+		<!--<dependency> <groupId>javax.servlet</groupId> <artifactId>jsp-api</artifactId>
 			<version>2.5</version> </dependency> -->
 
 		<dependency>
@@ -106,6 +106,15 @@
 			<artifactId>spring-security-saml2-core</artifactId>
 			<version>1.0.2.RELEASE</version>
 		</dependency>
+		<!-- fix spring security versioning issue, see
+			http://docs.spring.io/spring-security/site/docs/3.2.0.RELEASE/reference/htmlsingle/#maven-bom -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-framework-bom</artifactId>
+			<version>${spring.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
 
 		<!-- Hibernate -->
 
@@ -132,7 +141,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.8</version>
+			<version>1.7.22</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
