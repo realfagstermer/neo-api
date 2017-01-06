@@ -19,14 +19,14 @@ public class ConceptController {
     @Autowired
     private ConceptService conceptService;
 
-    @RequestMapping(value = "/concepts", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/concepts", method = RequestMethod.GET)
     public Collection<Concept> getAllConcepts(HttpServletRequest request, HttpServletResponse response) {
         String term = request.getParameter("term");
 
         if (term != null && !term.trim().isEmpty()) {
             // replace wildcard * with SQL wildcard %
             term = term.trim().replace('*', '%');
-            logger.info("Term search string: "+ term);
+            logger.info("Term search string: " + term);
 
             return conceptService.getConceptsMatching(term);
         } else {
@@ -34,9 +34,19 @@ public class ConceptController {
         }
     }
 
-    @RequestMapping(value = "/concepts/{conceptId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/concepts/{conceptId}", method = RequestMethod.GET)
     public Concept getConcept(@PathVariable("conceptId") int conceptId, HttpServletRequest request, HttpServletResponse response) {
         return conceptService.getConcept(conceptId);
     }
 
+    @RequestMapping(value = "/api/concepts", method = RequestMethod.POST)
+    public Concept createConcept(HttpServletRequest request, HttpServletResponse response) {
+        return null;
+    }
+
+    @RequestMapping(value = "/api/concepts/{conceptId}", method = RequestMethod.DELETE)
+    public Concept deleteConcept(@PathVariable("conceptId") int conceptId, HttpServletRequest request, HttpServletResponse response) {
+        conceptService.delConcept(conceptId);
+        return null;
+    }
 }
