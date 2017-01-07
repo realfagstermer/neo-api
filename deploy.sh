@@ -3,7 +3,7 @@
 # Sample deployment script for neo-api
 # Use -t to deploy as test (http://www.example.com/test/)
 
-appname=neo-api.war
+appname=neo.war
 
 source=target/$appname
 target_dir=/var/lib/tomcat/webapps

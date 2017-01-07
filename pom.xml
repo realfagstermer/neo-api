@@ -157,7 +157,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>neo-api</finalName>
+		<finalName>neo</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -173,7 +173,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<path>/neo-api</path>
+					<path>/neo</path>
 				</configuration>
 			</plugin>
 		</plugins>
