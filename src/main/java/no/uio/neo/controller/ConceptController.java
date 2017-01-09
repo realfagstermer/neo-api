@@ -13,14 +13,14 @@ import no.uio.neo.model.Concept;
 import no.uio.neo.service.ConceptService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/concepts")
 public class ConceptController {
     private static Logger logger = Logger.getLogger(ConceptController.class);
 
     @Autowired
     private ConceptService conceptService;
 
-    @RequestMapping(value = "/concepts", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public Collection<Concept> getAllConcepts(HttpServletRequest request, HttpServletResponse response) {
         String term = request.getParameter("term");
 
@@ -35,17 +35,17 @@ public class ConceptController {
         }
     }
 
-    @RequestMapping(value = "/concepts/{conceptId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{conceptId}", method = RequestMethod.GET)
     public Concept getConcept(@PathVariable("conceptId") int conceptId, HttpServletRequest request, HttpServletResponse response) {
         return conceptService.getConcept(conceptId);
     }
 
-    @RequestMapping(value = "/concepts", method = RequestMethod.POST)
-    public Concept createConcept(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
+    public Concept createConcept(@RequestBody Concept concept) {
+        return concept;
     }
 
-    @RequestMapping(value = "/concepts/{conceptId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{conceptId}", method = RequestMethod.DELETE)
     public Concept deleteConcept(@PathVariable("conceptId") int conceptId, HttpServletRequest request, HttpServletResponse response) {
         conceptService.delConcept(conceptId);
         return null;
