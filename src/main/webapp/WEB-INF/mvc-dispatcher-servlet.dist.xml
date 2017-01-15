@@ -96,13 +96,13 @@
 			default-target-url="/saml/web/metadata" />
 		<security:intercept-url pattern="/saml/web/metadata/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/saml/web/**" access="ROLE_ADMIN" />
-		<security:custom-filter before="FIRST" ref="metadataGeneratorFilter" />
+		<!-- <security:custom-filter before="FIRST" ref="metadataGeneratorFilter" /> -->
 	</security:http>
 
 	<!-- Secured pages with SAML as entry point -->
 	<security:http entry-point-ref="samlEntryPoint" use-expressions="false">
 		<security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
-		<security:custom-filter before="FIRST" ref="metadataGeneratorFilter" />
+		<!-- <security:custom-filter before="FIRST" ref="metadataGeneratorFilter" /> -->
 		<security:custom-filter after="BASIC_AUTH_FILTER" ref="samlFilter" />
 	</security:http>
 
@@ -182,19 +182,22 @@
 	</bean>
 
 	<!-- Filter automatically generates default SP metadata -->
-	<bean id="metadataGeneratorFilter" class="org.springframework.security.saml.metadata.MetadataGeneratorFilter">
+	<!--
+		<bean id="metadataGeneratorFilter" class="org.springframework.security.saml.metadata.MetadataGeneratorFilter">
 		<constructor-arg>
-			<bean class="org.springframework.security.saml.metadata.MetadataGenerator">
-				<property name="entityId" value="no.uio.neo-test" />
-				<property name="extendedMetadata">
-					<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
-						<property name="signMetadata" value="false" />
-						<property name="idpDiscoveryEnabled" value="true" />
-					</bean>
-				</property>
-			</bean>
+		<bean class="org.springframework.security.saml.metadata.MetadataGenerator">
+		<property name="entityId" value="neo-test.uio.no" />
+		<property name="entityBaseURL" value="https://neo-test.uio.no/neo" />
+		<property name="extendedMetadata">
+		<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
+		<property name="signMetadata" value="false" />
+		<property name="idpDiscoveryEnabled" value="true" />
+		</bean>
+		</property>
+		</bean>
 		</constructor-arg>
-	</bean>
+		</bean>
+	-->
 
 	<!-- The filter is waiting for connections on URL suffixed with filterSuffix and presents SP metadata there -->
 	<bean id="metadataDisplayFilter" class="org.springframework.security.saml.metadata.MetadataDisplayFilter" />
@@ -210,6 +213,38 @@
 	<bean id="metadata" class="org.springframework.security.saml.metadata.CachingMetadataManager">
 		<constructor-arg>
 			<list>
+				<!-- neo-test SP metadata -->
+				<bean class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">
+					<constructor-arg>
+						<bean class="org.opensaml.saml2.metadata.provider.ResourceBackedMetadataProvider">
+							<constructor-arg>
+								<bean class="java.util.Timer" />
+							</constructor-arg>
+							<constructor-arg>
+								<bean class="org.opensaml.util.resource.ClasspathResource">
+									<constructor-arg value="/metadata/neotestuiono_sp.xml" />
+								</bean>
+							</constructor-arg>
+							<property name="parserPool" ref="parserPool" />
+						</bean>
+					</constructor-arg>
+					<constructor-arg>
+						<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
+							<property name="local" value="true" />
+							<property name="securityProfile" value="metaiop" />
+							<property name="sslSecurityProfile" value="metaiop" />
+							<property name="sslHostnameVerification" value="allowAll" />
+							<property name="signMetadata" value="false" />
+							<property name="signingKey" value="neo" />
+							<property name="encryptionKey" value="neo" />
+							<property name="requireArtifactResolveSigned" value="false" />
+							<property name="requireLogoutRequestSigned" value="false" />
+							<property name="requireLogoutResponseSigned" value="false" />
+							<property name="idpDiscoveryEnabled" value="true" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<!-- weblogin IDP metadata -->
 				<bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider">
 					<constructor-arg>
 						<value type="java.lang.String">https://weblogin-test.uio.no/simplesaml/saml2/idp/metadata.php</value>
@@ -236,7 +271,13 @@
 	</bean>
 
 	<!-- Provider of default SAML Context -->
-	<bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderImpl" />
+	<bean id="contextProvider" class="org.springframework.security.saml.context.SAMLContextProviderLB">
+		<property name="scheme" value="https" />
+		<property name="serverName" value="neo-test.uio.no" />
+		<property name="serverPort" value="443" />
+		<property name="includeServerPortInRequestURL" value="false" />
+		<property name="contextPath" value="/neo" />
+	</bean>
 
 	<!-- Processing filter for WebSSO profile messages -->
 	<bean id="samlWebSSOProcessingFilter" class="org.springframework.security.saml.SAMLProcessingFilter">
