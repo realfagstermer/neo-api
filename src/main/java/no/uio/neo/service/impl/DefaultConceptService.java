@@ -1,6 +1,7 @@
 package no.uio.neo.service.impl;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,8 @@ public class DefaultConceptService implements ConceptService {
     }
 
     @Override
-    public Collection<Concept> getConceptsMatching(String term) {
-        return conceptDAO.getConceptsWithTerm(term);
+    public Collection<Concept> getConceptsMatching(String term, Locale lang) {
+        return conceptDAO.getConceptsWithTerm(term, lang);
     }
 
 }

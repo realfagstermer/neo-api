@@ -1,6 +1,7 @@
 package no.uio.neo.dao.hibernate;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import javax.persistence.criteria.*;
 
@@ -43,7 +44,7 @@ public class HibernateConceptDAO implements ConceptDAO {
     }
 
     @Override
-    public Collection<Concept> getConceptsWithTerm(String term) {
+    public Collection<Concept> getConceptsWithTerm(String term, Locale lang) {
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Concept> query = builder.createQuery(Concept.class);
@@ -54,8 +55,14 @@ public class HibernateConceptDAO implements ConceptDAO {
         query.select(concept).distinct(true);
 
         // lowercase both sides of comparison, for case insensitive search
-        query.where(builder.like(builder.lower(join.get(Term_.lexicalValue)), term.toLowerCase()));
-        return session.createQuery(query).getResultList();
+        Predicate matches = builder.like(builder.lower(join.get(Term_.lexicalValue)), term.toLowerCase());
+
+        // optionally narrow to specified lang
+        if (lang != null) {
+            matches = builder.and(matches, join.get(Term_.langId).in(lang.getLanguage()));
+        }
+
+        return session.createQuery(query.where(matches)).getResultList();
     }
 
     @Override

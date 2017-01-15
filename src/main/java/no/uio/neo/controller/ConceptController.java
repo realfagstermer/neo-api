@@ -1,6 +1,7 @@
 package no.uio.neo.controller;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,14 +23,19 @@ public class ConceptController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Collection<Concept> getAllConcepts(HttpServletRequest request, HttpServletResponse response) {
+        Locale lang = null;
         String term = request.getParameter("term");
+
+        if (request.getParameter("lang") != null) {
+            lang = new Locale(request.getParameter("lang"));
+        }
 
         if (term != null && !term.trim().isEmpty()) {
             // replace wildcard * with SQL wildcard %
             term = term.trim().replace('*', '%');
             logger.info("Term search string: " + term);
 
-            return conceptService.getConceptsMatching(term);
+            return conceptService.getConceptsMatching(term, lang);
         } else {
             return conceptService.getAllConcepts();
         }

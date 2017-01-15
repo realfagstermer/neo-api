@@ -1,6 +1,7 @@
 package no.uio.neo.dao;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import no.uio.neo.model.Concept;
 
@@ -39,7 +40,8 @@ public interface ConceptDAO {
      * search for concepts with terms matching term
      *
      * @param term search string
+     * @param lang optional language to match, or null if no language restriction
      * @return Collection of matching concepts
      */
-    Collection<Concept> getConceptsWithTerm(String term);
+    Collection<Concept> getConceptsWithTerm(String term, Locale lang);
 }
