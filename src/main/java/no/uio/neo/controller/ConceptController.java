@@ -27,7 +27,12 @@ public class ConceptController {
         String term = request.getParameter("term");
 
         if (request.getParameter("lang") != null) {
-            lang = new Locale(request.getParameter("lang"));
+            String l = request.getParameter("lang").trim();
+
+            // Ignore empty lang parameter
+            if (!l.isEmpty()) {
+                lang = new Locale(l);
+            }
         }
 
         if (term != null && !term.trim().isEmpty()) {
