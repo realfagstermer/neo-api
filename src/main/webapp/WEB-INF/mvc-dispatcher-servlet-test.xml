@@ -15,11 +15,6 @@
 
 	<import resource="mvc-dispatcher-servlet.xml" />
 
-	<!-- Enable auto-wiring -->
-	<context:annotation-config />
-	<context:component-scan base-package="no.uio.neo" />
-	<mvc:annotation-driven />
-
 	<!-- Hibernate -->
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
