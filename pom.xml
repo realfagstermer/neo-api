@@ -159,9 +159,9 @@
 			<version>1.2.136</version>
 		</dependency>
 		<dependency>
-			<groupId>postgresql</groupId>
+			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>8.4-701.jdbc4</version>
+			<version>9.4-1206-jdbc42</version>
 		</dependency>
 
 	</dependencies>
