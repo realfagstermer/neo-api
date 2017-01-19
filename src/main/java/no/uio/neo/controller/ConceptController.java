@@ -21,7 +21,7 @@ public class ConceptController {
     @Autowired
     private ConceptService conceptService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public Collection<Concept> getAllConcepts(HttpServletRequest request, HttpServletResponse response) {
         Locale lang = null;
         String term = request.getParameter("term");
@@ -51,9 +51,10 @@ public class ConceptController {
         return conceptService.getConcept(conceptId);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public Concept createConcept(@RequestBody Concept concept) {
-        return concept;
+        int id = conceptService.addConcept(concept);
+        return conceptService.getConcept(id);
     }
 
     @RequestMapping(value = "/{conceptId}", method = RequestMethod.DELETE)

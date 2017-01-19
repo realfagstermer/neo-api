@@ -42,4 +42,9 @@ public class DefaultConceptService implements ConceptService {
         return conceptDAO.getConceptsWithTerm(term, lang);
     }
 
+    @Override
+    public int addConcept(Concept concept) {
+        return conceptDAO.saveConcept(concept);
+    }
+
 }

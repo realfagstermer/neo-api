@@ -6,7 +6,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2016-12-21T10:39:44.801+0100")
+@Generated(value="Dali", date="2017-01-18T13:16:21.664+0100")
 @StaticMetamodel(Concept.class)
 public class Concept_ {
 	public static volatile SingularAttribute<Concept, Integer> conceptId;
@@ -17,7 +17,6 @@ public class Concept_ {
 	public static volatile SingularAttribute<Concept, Timestamp> deprecated;
 	public static volatile SingularAttribute<Concept, Integer> deprecatedBy;
 	public static volatile SingularAttribute<Concept, String> editorialNote;
-	public static volatile SingularAttribute<Concept, Integer> externalId;
 	public static volatile SingularAttribute<Concept, Timestamp> modified;
 	public static volatile SingularAttribute<Concept, Integer> modifiedBy;
 	public static volatile SingularAttribute<Concept, String> note;
@@ -26,4 +25,5 @@ public class Concept_ {
 	public static volatile SingularAttribute<Concept, String> usedByLibs;
 	public static volatile SingularAttribute<Concept, String> vocabId;
 	public static volatile ListAttribute<Concept, Term> terms;
+	public static volatile SingularAttribute<Concept, Integer> externalId;
 }

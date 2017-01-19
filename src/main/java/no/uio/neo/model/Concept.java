@@ -2,6 +2,9 @@ package no.uio.neo.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -50,9 +53,10 @@ public class Concept {
     private String editorialNote;
 
     @JsonIgnore
-    @SequenceGenerator(name = "CONCEPTS_EXTERNALID_GENERATOR", sequenceName = "CONCEPTS_EXTERNAL_ID_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONCEPTS_EXTERNALID_GENERATOR")
-    @Column(name = "external_id")
+    // @SequenceGenerator(name = "CONCEPTS_EXTERNALID_GENERATOR", sequenceName = "CONCEPTS_EXTERNAL_ID_SEQ")
+    // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONCEPTS_EXTERNALID_GENERATOR")
+    @Generated(GenerationTime.INSERT)
+    @Column(name = "external_id", columnDefinition = "serial", insertable = false)
     private Integer externalId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
