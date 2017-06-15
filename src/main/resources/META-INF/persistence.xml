@@ -11,5 +11,6 @@
 		<class>no.uio.neo.model.Term</class>
 		<class>no.uio.neo.model.User</class>
 		<class>no.uio.neo.model.Vocabulary</class>
+		<class>no.uio.neo.model.ConceptString</class>
 	</persistence-unit>
 </persistence>
