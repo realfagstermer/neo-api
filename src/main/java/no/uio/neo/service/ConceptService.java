@@ -15,4 +15,6 @@ public interface ConceptService {
     Collection<Concept> getConceptsMatching(String term, Locale lang);
 
     int addConcept(Concept concept);
+
+    Concept updateConcept(Concept concept);
 }

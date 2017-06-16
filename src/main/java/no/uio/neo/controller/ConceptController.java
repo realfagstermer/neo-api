@@ -57,6 +57,11 @@ public class ConceptController {
         return conceptService.getConcept(id);
     }
 
+    @RequestMapping(value = "/{conceptId}", method = RequestMethod.PUT, consumes = "application/json")
+    public Concept updateConcept(@RequestBody Concept concept) {
+        return conceptService.updateConcept(concept);
+    }
+
     @RequestMapping(value = "/{conceptId}", method = RequestMethod.DELETE)
     public Concept deleteConcept(@PathVariable("conceptId") int conceptId, HttpServletRequest request, HttpServletResponse response) {
         conceptService.delConcept(conceptId);

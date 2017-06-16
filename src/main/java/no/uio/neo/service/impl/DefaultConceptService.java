@@ -47,4 +47,9 @@ public class DefaultConceptService implements ConceptService {
         return conceptDAO.saveConcept(concept);
     }
 
+    @Override
+    public Concept updateConcept(Concept concept) {
+        return conceptDAO.updateConcept(concept);
+    }
+
 }

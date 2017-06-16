@@ -70,4 +70,9 @@ public class HibernateConceptDAO implements ConceptDAO {
         sessionFactory.getCurrentSession().delete(concept);
     }
 
+    @Override
+    public Concept updateConcept(Concept concept) {
+        return (Concept) sessionFactory.getCurrentSession().merge(concept);
+    }
+
 }

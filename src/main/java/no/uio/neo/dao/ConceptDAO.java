@@ -44,4 +44,12 @@ public interface ConceptDAO {
      * @return Collection of matching concepts
      */
     Collection<Concept> getConceptsWithTerm(String term, Locale lang);
+
+    /**
+     * Merge a changed concept back into the database
+     *
+     * @param concept changed concept
+     * @return the resulting concept, read from the database
+     */
+    Concept updateConcept(Concept concept);
 }
