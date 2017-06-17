@@ -30,7 +30,7 @@
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="org.h2.Driver" />
-		<property name="jdbcUrl" value="jdbc:h2:file:~/db/neo;DB_CLOSE_ON_EXIT=FALSE" />
+		<property name="jdbcUrl" value="jdbc:h2:mem:neo;MODE=PostgreSQL" />
 		<property name="user" value="sa" />
 		<property name="password" value="sa" />
 	</bean>
