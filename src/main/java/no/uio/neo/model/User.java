@@ -33,11 +33,11 @@ public class User {
     @Column(name = "created_by")
     private Integer createdBy;
 
-    // private String domain;
-
     private String name;
 
     private String username;
+
+    private String access;
 
     public User() {
     }
@@ -66,14 +66,6 @@ public class User {
         this.createdBy = createdBy;
     }
 
-    // public String getDomain() {
-    // return this.domain;
-    // }
-    //
-    // public void setDomain(String domain) {
-    // this.domain = domain;
-    // }
-
     public String getName() {
         return this.name;
     }
@@ -88,6 +80,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getAccess() {
+        return access;
+    }
+
+    public void setAccess(String access) {
+        this.access = access;
     }
 
 }
