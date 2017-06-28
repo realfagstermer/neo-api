@@ -20,28 +20,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     public Collection<User> getAllUsers(HttpServletRequest request, HttpServletResponse response) {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
     public User getUser(@PathVariable("userId") int userId, HttpServletRequest request, HttpServletResponse response) {
         return userService.getUser(userId);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/users", method = RequestMethod.POST, consumes = "application/json")
     public User createUser(@RequestBody User user) {
         int id = userService.addUser(user);
         return userService.getUser(id);
     }
 
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.PUT, consumes = "application/json")
+    @RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT, consumes = "application/json")
     public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }
 
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
     public User deleteUser(@PathVariable("userId") int userId, HttpServletRequest request, HttpServletResponse response) {
         userService.delUser(userId);
         return null;
