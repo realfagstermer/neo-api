@@ -20,6 +20,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/me", method = RequestMethod.GET)
+    public User getCurrentUser(HttpServletRequest request, HttpServletResponse response) {
+        return userService.getCurrentUser();
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public Collection<User> getAllUsers(HttpServletRequest request, HttpServletResponse response) {
         return userService.getAllUsers();

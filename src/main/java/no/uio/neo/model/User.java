@@ -42,6 +42,11 @@ public class User {
     public User() {
     }
 
+    public User(String username, String name) {
+        this.username = username;
+        this.name = name;
+    }
+
     public Integer getUserId() {
         return this.userId;
     }

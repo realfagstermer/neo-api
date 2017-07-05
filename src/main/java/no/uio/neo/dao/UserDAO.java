@@ -15,6 +15,14 @@ public interface UserDAO {
     User getUser(int id);
 
     /**
+     * return a user
+     *
+     * @param username of the user
+     * @return the user
+     */
+    User getUser(String username);
+
+    /**
      * save a user
      *
      * @param user the user to be saved

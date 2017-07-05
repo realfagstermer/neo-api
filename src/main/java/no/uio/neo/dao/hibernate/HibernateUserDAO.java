@@ -11,11 +11,23 @@ import org.springframework.stereotype.Repository;
 
 import no.uio.neo.dao.UserDAO;
 import no.uio.neo.model.User;
+import no.uio.neo.model.User_;
 
 @Repository
 public class HibernateUserDAO implements UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
+
+    @Override
+    public User getUser(String username) {
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> user = query.from(User.class);
+        query.select(user);
+        query.where(builder.equal(user.get(User_.username), username));
+        return session.createQuery(query).uniqueResult();
+    }
 
     @Override
     public User getUser(int id) {
