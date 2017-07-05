@@ -89,7 +89,6 @@
 	<security:http security="none" pattern="/images/**" />
 	<security:http security="none" pattern="/css/**" />
 	<!-- <security:http security="none" pattern="/app/**" /> -->
-	<security:http security="none" pattern="/logout.jsp" />
 
 	<!-- Secured pages with SAML as entry point -->
 	<security:http entry-point-ref="samlEntryPoint" use-expressions="true">
@@ -132,7 +131,7 @@
 
 	<!-- Handler for successful logout -->
 	<bean id="successLogoutHandler" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
-		<property name="defaultTargetUrl" value="/logout.jsp" />
+		<property name="defaultTargetUrl" value="/" />
 	</bean>
 
 	<security:authentication-manager alias="authenticationManager">
