@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import no.uio.neo.model.User;
@@ -36,14 +38,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST, consumes = "application/json")
-    public User createUser(@RequestBody User user) {
+    public User postUser(@RequestBody User user) {
         int id = userService.addUser(user);
         return userService.getUser(id);
     }
 
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT, consumes = "application/json")
-    public User updateUser(@RequestBody User user) {
-        return userService.updateUser(user);
+    public ResponseEntity<User> putUser(@PathVariable("userId") int userId, @RequestBody User user) {
+        logger.trace("user put:" + user.getUsername());
+
+        if (userId != user.getUserId()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        return ResponseEntity.ok(userService.updateUser(user));
     }
 
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
